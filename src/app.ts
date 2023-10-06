@@ -3,13 +3,13 @@ import productsController from './controllers/products.controller';
 import ordersController from './controllers/orders.controller';
 import loginController from './controllers/login.controller';
 import validateProducts from './utils/middlewares/products.middleware';
-import { validateToken, validateOrders } from './utils/middlewares';
+import { validateToken, validateOrders, loginAuth } from './utils/middlewares';
 
 const app = express();
 app.use(express.json());
 
 // Login
-app.post('/login', loginController.login);
+app.post('/login', loginAuth, loginController.login);
 
 // Products
 app.post('/products', ...validateProducts, productsController.insert);
